@@ -38,5 +38,4 @@ status: The status of the task (todo, in-progress, done)<br />
 createdAt: The date and time when the task was created<br />
 updatedAt: The date and time when the task was last updated<br />
 Make sure to add these properties to the JSON file when adding a new task and update them when updating a task.
-
-https://github.com/KHA-ERL/terminalTaskManager
+github url: https://github.com/KHA-ERL/terminalTaskManager
