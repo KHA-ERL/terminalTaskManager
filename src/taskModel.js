@@ -9,14 +9,17 @@ function readTask(){
         if (!fs.existsSync(filepath)){
             return[];
         }
-
         const data = fs.readFileSync(filepath, "utf8");
-        return json.parse(data);
+        // Check if file is empty
+        if (data.trim() === "") {
+            return [];
+        }
+        return JSON.parse(data);
     }
 
     catch(err){
         console.error("ERROR READING TASK FILE", err)
-        return[]
+        return[];
     }
 };
 

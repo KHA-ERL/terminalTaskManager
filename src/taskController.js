@@ -8,7 +8,7 @@ function addTask(description){
     const newTask = {
         id: generateId(),
         description,
-        status: 'todo',
+        status: 'Todo',
         createdAt: new Date(),
         updatedAt: new Date()
     };
@@ -20,18 +20,18 @@ function addTask(description){
 function updateTask(id, newDescription){
     const tasks = readTask();
     const task = tasks.find(t => t.id === id);
-    if (!task) return console.log("❌ Task not found");
+    if (!task) return console.log("Task not found❌");
     task.description = newDescription;
     task.updatedAt = new Date();
-    writeTask(task);
+    writeTask(tasks);
     console.log("Task Updated")
 }
 
 function deleteTask(id){
-    const tasks = readTask()
+    let tasks = readTask()
     const initialLength = tasks.length
     tasks = tasks.filter(t => t.id !== id)
-    if (tasks.length === initialLength) return console.log("Task not found");
+    if (tasks.length === initialLength) return console.log("Task not found❌");
     writeTask(tasks);
     console.log("Task updated")
 }
@@ -44,17 +44,18 @@ function updateStatus(id, status){
 
     const tasks = readTask()
     const task =  tasks.find(t => t.id === id)
-    if (!task) return console.log("Task not found");
-    tasks.status = status;
-    tasks.updatedAt = new Date();
+    if (!task) return console.log("Task not found❌");
+    task.status = status;
+    task.updatedAt = new Date();
     writeTask(tasks)
     console.log(`Task marked as "${status}"`)
 }
 
 function listAllTasks(){
     const tasks = readTask()
-    if(tasks === 0) return console.log("No task found");
-    console.table( tasks.map( ({id, description, validStatus}) => ({id, description, validStatus}) ))
+    if(tasks === 0) return console.log("No task found❌");
+    console.table(tasks.map(({ id, description, status }) => ({ id, description, status })));
+
 }
 
 function listTaskByStatus(status){
@@ -64,11 +65,11 @@ function listTaskByStatus(status){
     console.table(filtered.map(({ id, description, status }) => ({ id, description, status })));
 }
 
-module.exports(
+module.exports = {
     addTask,
     updateTask,
     deleteTask,
     updateStatus,
     listAllTasks,
     listTaskByStatus
-)
+};

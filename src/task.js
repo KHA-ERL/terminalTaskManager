@@ -1,22 +1,15 @@
-const commands = [
-    {name: "add", description: "", status: "", createdAt: "", updatedAt: ""},
-    {name: "update", description: ""},
-    {name: "delete", description: ""},
-    {name: "list", description: ""},
-    {name: "list_done", description: ""},
-    {name: "list_not_done", description: ""},
-    {name: "list_in_progress", description: ""},
-] = require('./taskController');
+const path = require("path");
 
-//node task.js add ""
-//node task.js delete ""
-//node task.js update ""
-//node task.js list ""
-//node task.js list_done""
-//node task.js list_not_done ""
-//node task.js list_in_progress ""
+const {
+    addTask,
+    updateTask,
+    deleteTask,
+    listAllTasks,
+    updateStatus,
+    listTaskByStatus
+} = require('./taskController');
 
-const args = [,, commands, args] = process.argv;
+const [,, command, ...args] = process.argv;
 
 switch (command) {
     case 'add':
@@ -33,7 +26,7 @@ switch (command) {
         break;
     case 'list':
         if (!args[0]) listAllTasks();
-        else listTasksByStatus(args[0]);
+        else listTaskByStatus(args[0]);
         break;
     default:
         console.log('Unknown command.');
